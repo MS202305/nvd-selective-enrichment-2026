@@ -40,6 +40,21 @@ directory); every path can be overridden with command-line flags
 (`--group-a`, `--group-c`, `--epss`, `--kev`, ...). Run any script with
 `-h` to see its flags.
 
+## Group definitions
+
+Each NVD group file already contains only the records published inside the
+group's date window (applied when the data was retrieved from the API,
+paper Section III.A). The scripts then apply the vulnStatus filter below.
+
+| Group | Publication window | vulnStatus | Raw | Filtered |
+| --- | --- | --- | --- | --- |
+| A (backlog)     | 2024-02-12 to 2026-02-28 | Deferred     | 97,103  | 29,062 |
+| B (post-policy) | 2026-04-15 to 2026-06-29 | Deferred     | 17,105  |  6,615 |
+| C (reference)   | 2024-02-12 to 2026-06-29 | Analyzed     | 123,639 | 62,192 |
+| D (transition)  | 2026-03-01 to 2026-04-14 | all statuses | 9,427   |  9,427 |
+
+For Group D the KEV check uses the Deferred subset (2,330 records).
+
 ## Requirements
 
 Python 3.9 or newer. Four scripts use only the standard library.
