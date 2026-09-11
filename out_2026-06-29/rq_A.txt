@@ -1,0 +1,81 @@
+EPSS snapshot: 343948 CVEs;  KEV catalog: 1630 CVEs
+excluded status: ['Deferred'];  reference status: ['Analyzed']
+
+EPSS coverage (records / matched):
+  Group A: 29062/29062   unmatched 0
+  Group B: 6526/6615   unmatched 89
+  Group C: 62192/62192   unmatched 0
+
+Descriptive statistics (matched records):
+  Group A   n= 29062  mean=0.00653  median=0.00285
+  Group B   n=  6526  mean=0.00373  median=0.00267
+  Group C   n= 62192  mean=0.01226  median=0.00328
+
+Threshold analysis (share of matched records):
+  Group A
+    highest EPSS = 0.9910
+    EPSS >= 0.05 :   335 (1.1527%)
+    EPSS >= 0.5  :    47 (0.1617%)
+    EPSS >= 0.7  :    27 (0.0929%)
+  Group B
+    highest EPSS = 0.3651
+    EPSS >= 0.05 :    15 (0.2298%)
+    EPSS >= 0.5  :     0 (0.0%)
+    EPSS >= 0.7  :     0 (0.0%)
+
+Top 15 EPSS scores:
+  Group A
+    0.9910  CVE-2025-1974    2025-03-25  CVSS 9.8 (Kubernetes)             CWE-653              -
+    0.9438  CVE-2024-29895   2024-05-14  CVSS 10.0 (GitHub, Inc.)          CWE-77               -
+    0.9197  CVE-2023-45288   2024-04-04  CVSS 7.5 (CISA-ADP)               -                    -
+    0.8978  CVE-2024-7954    2024-08-23  CVSS 9.8 (VulnCheck)              CWE-95,CWE-1286      -
+    0.8947  CVE-2025-1094    2025-02-13  CVSS 8.1 (PostgreSQL)             CWE-149              -
+    0.8745  CVE-2024-25600   2024-06-04  CVSS 10.0 (Patchstack)            CWE-94               -
+    0.8721  CVE-2024-27983   2024-04-09  CVSS 8.2 (HackerOne)              CWE-362              -
+    0.8649  CVE-2024-3721    2024-04-13  CVSS 6.5 (VulDB)                  CWE-78               -
+    0.8537  CVE-2025-34037   2025-06-24  CVSS 10.0 (VulnCheck)             CWE-78               -
+    0.8372  CVE-2024-32651   2024-04-26  CVSS 10.0 (GitHub, Inc.)          CWE-1336             -
+    0.8339  CVE-2024-6782    2024-08-06  CVSS 9.8 (STAR Labs SG Pte. Ltd.) CWE-863              -
+    0.8324  CVE-2024-2653    2024-04-03  CVSS 8.2 (CISA-ADP)               -                    -
+    0.8307  CVE-2025-1098    2025-03-25  CVSS 8.8 (Kubernetes)             CWE-20               -
+    0.8060  CVE-2024-2876    2024-05-02  CVSS 9.8 (Wordfence)              CWE-89               -
+    0.7906  CVE-2024-8503    2024-09-10  CVSS 9.8 (CISA-ADP)               CWE-89               -
+  Group B
+    0.3651  CVE-2026-3844    2026-04-23  CVSS 9.8 (Wordfence)              CWE-434              -
+    0.2219  CVE-2026-27760   2026-04-28  CVSS 9.2 (VulnCheck)              CWE-94               -
+    0.1954  CVE-2026-23734   2026-05-20  CVSS 9.3 (GitHub, Inc.)           CWE-23               -
+    0.1701  CVE-2026-7864    2026-05-08  CVSS 6.9 (Switzerland Government Common Vulnerability Program) CWE-497              -
+    0.1565  CVE-2026-44127   2026-05-08  CVSS 8.8 (Switzerland Government Common Vulnerability Program) CWE-73               -
+    0.1461  CVE-2026-8181    2026-05-14  CVSS 9.8 (Wordfence)              CWE-287              -
+    0.1413  CVE-2026-6483    2026-04-17  CVSS 8.3 (VulDB)                  CWE-77,CWE-78        -
+    0.0987  CVE-2026-40871   2026-04-21  CVSS 7.2 (GitHub, Inc.)           CWE-20,CWE-89,CWE-116,CWE-564 -
+    0.0946  CVE-2026-8732    2026-05-29  CVSS 9.8 (Wordfence)              CWE-306              -
+    0.0925  CVE-2026-7567    2026-05-01  CVSS 9.8 (Wordfence)              CWE-288              -
+    0.0689  CVE-2026-7474    2026-05-12  CVSS 8.8 (HashiCorp Inc.)         CWE-22               -
+    0.0656  CVE-2026-11499   2026-06-08  CVSS 10.0 (VulDB)                 CWE-119,CWE-121      -
+    0.0598  CVE-2026-38360   2026-05-08  CVSS 9.8 (CISA-ADP)               CWE-22               -
+    0.0586  CVE-2026-44262   2026-05-12  CVSS 9.4 (GitHub, Inc.)           CWE-94               -
+    0.0515  CVE-2026-7665    2026-06-06  CVSS 5.3 (Wordfence)              CWE-639              -
+
+=== RQ1: Group A vs C ===
+Stage 1  raw
+    U=796662855.5  p=2.488e-183  r=0.1185   (n1=29062, ref=62192)
+    95% bootstrap CI for r: [0.1115, 0.1262]  (B=1000, seed=20260629)
+Stage 2  age-restricted reference
+    U=576845615.0  p=0.000e+00  r=0.1807   (n1=29062, ref=48451)
+    95% bootstrap CI for r: [0.1725, 0.1883]  (B=1000, seed=20260629)
+Stage 3  age-restricted, KEV removed (370 KEV records dropped)
+    U=576664484.5  p=0.000e+00  r=0.1746   (n1=29062, ref=48081)
+    95% bootstrap CI for r: [0.1663, 0.1826]  (B=1000, seed=20260629)
+
+=== RQ2: Group B vs C ===
+Stage 1  raw
+    U=165489678.5  p=3.371e-133  r=0.1845   (n1=6526, ref=62192)
+    95% bootstrap CI for r: [0.1726, 0.1955]  (B=1000, seed=20260629)
+Stage 2  age-restricted reference
+    U=28087758.0  p=4.854e-31  r=-0.1124   (n1=6526, ref=7738)
+    95% bootstrap CI for r: [-0.1312, -0.0943]  (B=1000, seed=20260629)
+Stage 3  age-restricted, KEV removed (35 KEV records dropped)
+    U=28086371.0  p=1.213e-33  r=-0.1174   (n1=6526, ref=7703)
+    95% bootstrap CI for r: [-0.1358, -0.0998]  (B=1000, seed=20260629)
+

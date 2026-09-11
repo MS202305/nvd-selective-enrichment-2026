@@ -1,0 +1,13 @@
+Group D  (transition window)
+  total records: 9427
+  status breakdown (status | count | % of group):
+    Analyzed           6003   63.68%
+    Deferred           2330   24.72%
+    Modified            571    6.06%
+    Awaiting Analysis    417    4.42%
+    Rejected             97    1.03%
+    Undergoing Analysis      9     0.1%
+
+  Analyzed :   6003  (63.68%)
+  Deferred :   2330  (24.72%)
+  Other    :   1094  (11.6%)

@@ -1,0 +1,33 @@
+snapshot 2026-09-01: sub-window retrievals (A+B+D) vs full-period retrieval (C)
+  records in sub-window retrievals :  146916
+  records in full-period retrieval :  146916
+  shared                           :  146916
+  only in sub-window               :       0
+  only in full-period              :       0
+
+  status differs between retrievals: 22 / 146916
+    Group B: Undergoing Analysis -> Analyzed: 10
+    Group B: Deferred -> Rejected: 8
+    Group B: Awaiting Analysis -> Undergoing Analysis: 4
+      CVE-2026-20727  Group B  Undergoing Analysis -> Analyzed  (published 2026-08-11T17:17:50)
+      CVE-2026-20778  Group B  Undergoing Analysis -> Analyzed  (published 2026-08-11T17:17:52)
+      CVE-2026-24099  Group B  Undergoing Analysis -> Analyzed  (published 2026-08-11T17:17:55)
+      CVE-2026-24911  Group B  Undergoing Analysis -> Analyzed  (published 2026-08-11T17:17:56)
+      CVE-2026-59283  Group B  Undergoing Analysis -> Analyzed  (published 2026-08-27T20:17:54)
+      CVE-2026-67307  Group B  Awaiting Analysis -> Undergoing Analysis  (published 2026-08-01T13:17:00)
+      CVE-2026-70633  Group B  Awaiting Analysis -> Undergoing Analysis  (published 2026-08-06T22:18:27)
+      CVE-2026-70634  Group B  Awaiting Analysis -> Undergoing Analysis  (published 2026-08-06T22:18:27)
+      CVE-2026-70635  Group B  Awaiting Analysis -> Undergoing Analysis  (published 2026-08-06T22:18:28)
+      CVE-2026-72639  Group B  Undergoing Analysis -> Analyzed  (published 2026-08-13T20:17:24)
+      CVE-2026-72642  Group B  Undergoing Analysis -> Analyzed  (published 2026-08-13T20:17:24)
+      CVE-2026-78475  Group B  Undergoing Analysis -> Analyzed  (published 2026-08-24T18:17:34)
+      CVE-2026-78477  Group B  Deferred -> Rejected  (published 2026-08-25T06:19:01)
+      CVE-2026-78562  Group B  Deferred -> Rejected  (published 2026-08-25T09:17:36)
+      CVE-2026-78563  Group B  Deferred -> Rejected  (published 2026-08-25T09:17:36)
+      CVE-2026-78566  Group B  Deferred -> Rejected  (published 2026-08-25T09:17:36)
+      CVE-2026-78568  Group B  Deferred -> Rejected  (published 2026-08-25T09:17:36)
+      CVE-2026-78570  Group B  Deferred -> Rejected  (published 2026-08-25T10:18:13)
+      CVE-2026-78572  Group B  Deferred -> Rejected  (published 2026-08-25T10:18:13)
+      CVE-2026-78576  Group B  Deferred -> Rejected  (published 2026-08-25T10:18:13)
+      ... and 2 more
+

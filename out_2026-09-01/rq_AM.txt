@@ -1,0 +1,71 @@
+EPSS snapshot: 366848 CVEs;  KEV catalog: 1687 CVEs
+excluded status: ['Deferred'];  reference status: ['Analyzed', 'Modified']
+
+EPSS coverage (records / matched):
+  Group A: 29052/29052   unmatched 0
+  Group B: 13748/13752   unmatched 4
+  Group C: 89066/89067   unmatched 1
+
+Descriptive statistics (matched records):
+  Group A   n= 29052  mean=0.00688  median=0.00305
+  Group B   n= 13748  mean=0.00419  median=0.00298
+  Group C   n= 89066  mean=0.01208  median=0.00341
+
+Threshold analysis (share of matched records):
+  Group A
+    highest EPSS = 0.9952
+    EPSS >= 0.05 :   346 (1.191%)
+    EPSS >= 0.5  :    55 (0.1893%)
+    EPSS >= 0.7  :    29 (0.0998%)
+  Group B
+    highest EPSS = 0.7077
+    EPSS >= 0.05 :    36 (0.2619%)
+    EPSS >= 0.5  :     1 (0.0073%)
+    EPSS >= 0.7  :     1 (0.0073%)
+
+Top 10 EPSS scores:
+  Group A
+    0.9952  CVE-2025-1974
+    0.9846  CVE-2024-29895
+    0.9197  CVE-2023-45288
+    0.9088  CVE-2025-34037
+    0.9005  CVE-2024-7954
+    0.9003  CVE-2025-1094
+    0.8823  CVE-2024-25600
+    0.8721  CVE-2024-27983
+    0.8649  CVE-2024-3721
+    0.8412  CVE-2024-6782
+  Group B
+    0.7077  CVE-2026-61511
+    0.3463  CVE-2026-27760
+    0.2770  CVE-2026-3844
+    0.2151  CVE-2026-8732
+    0.1956  CVE-2026-23734
+    0.1701  CVE-2026-7864
+    0.1599  CVE-2026-16723
+    0.1565  CVE-2026-44127
+    0.1461  CVE-2026-8181
+    0.1413  CVE-2026-6483
+
+=== RQ1: Group A vs C ===
+Stage 1  raw
+    U=1158882532.5  p=2.221e-157  r=0.1043   (n1=29052, ref=89066)
+    95% bootstrap CI for r: [0.0969, 0.1115]  (B=1000, seed=20260629)
+Stage 2  age-restricted reference
+    U=775862572.0  p=0.000e+00  r=0.1719   (n1=29052, ref=64503)
+    95% bootstrap CI for r: [0.1645, 0.1796]  (B=1000, seed=20260629)
+Stage 3  age-restricted, KEV removed (374 KEV records dropped)
+    U=775689079.5  p=0.000e+00  r=0.1673   (n1=29052, ref=64129)
+    95% bootstrap CI for r: [0.1599, 0.1750]  (B=1000, seed=20260629)
+
+=== RQ2: Group B vs C ===
+Stage 1  raw
+    U=535653533.5  p=1.332e-123  r=0.1251   (n1=13748, ref=89066)
+    95% bootstrap CI for r: [0.1156, 0.1344]  (B=1000, seed=20260629)
+Stage 2  age-restricted reference
+    U=130545417.0  p=1.780e-20  r=-0.0607   (n1=13748, ref=17904)
+    95% bootstrap CI for r: [-0.0739, -0.0480]  (B=1000, seed=20260629)
+Stage 3  age-restricted, KEV removed (78 KEV records dropped)
+    U=130530566.5  p=2.381e-23  r=-0.0652   (n1=13748, ref=17826)
+    95% bootstrap CI for r: [-0.0788, -0.0514]  (B=1000, seed=20260629)
+

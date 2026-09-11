@@ -1,0 +1,5 @@
+Group A: 29062 scores (0 dropped)
+Group B: 6526 scores (89 dropped)
+Group C: 62192 scores (0 dropped)
+wrote fig_survival_A_vs_C_2026-06-29.png (and .pdf)
+wrote fig_survival_B_vs_C_2026-06-29.png (and .pdf)

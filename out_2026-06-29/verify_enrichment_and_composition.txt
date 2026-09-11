@@ -1,0 +1,53 @@
+registry: 793 sources;  KEV: 1630 CVEs
+
+============================================================
+SECTION A - Enrichment Completeness
+============================================================
+[Group A] completeness  (n = 29062)
+  CPE  NVD-generated (configurations) : 0 (0.0%)
+  CPE  CNA-supplied  (affected)       : 3883 (13.3611%)
+  CWE  coverage (real)                : 27234 (93.71%)
+  CWE  NVD-assigned                   : 0 (0.0%)
+  CVSS non-NVD base score             : 27586 (94.9212%)
+  CVSS NVD-assigned base score        : 0 (0.0%)
+
+[Group B] completeness  (n = 6615)
+  CPE  NVD-generated (configurations) : 0 (0.0%)
+  CPE  CNA-supplied  (affected)       : 939 (14.195%)
+  CWE  coverage (real)                : 6553 (99.0627%)
+  CWE  NVD-assigned                   : 0 (0.0%)
+  CVSS non-NVD base score             : 6614 (99.9849%)
+  CVSS NVD-assigned base score        : 0 (0.0%)
+
+============================================================
+SECTION A - KEV Intersection (deferred records)
+============================================================
+[Group A] KEV intersection: 0/29062 (0.0%)
+[Group B] KEV intersection: 0/6615 (0.0%)
+[Group D] KEV intersection: 0/2330 (0.0%)
+
+============================================================
+SECTION B - Source Provider Composition (Table II)
+============================================================
+[Group A] source composition  (n = 29062)
+  Top 6 CVSS-score sources (source | records | %):
+    Patchstack                   |   9957 |  34.26%  (CWE 34.25%)
+    Wordfence                    |   4284 |  14.74%  (CWE 14.72%)
+    CISA-ADP                     |   2877 |    9.9%  (CWE 9.25%)
+    GitHub, Inc.                 |   1477 |   5.08%  (CWE 5.08%)
+    VulDB                        |    979 |   3.37%  (CWE 3.37%)
+    VulnCheck                    |    967 |   3.33%  (CWE 3.32%)
+  Patchstack + Wordfence combined: CVSS 49.0%   CWE 48.97%
+  (a record may be counted under several sources; column percentages need not sum to 100%)
+
+[Group B] source composition  (n = 6615)
+  Top 6 CVSS-score sources (source | records | %):
+    GitHub, Inc.                 |   1316 |  19.89%  (CWE 19.89%)
+    VulDB                        |   1291 |  19.52%  (CWE 19.52%)
+    Patchstack                   |    892 |  13.48%  (CWE 13.5%)
+    Wordfence                    |    804 |  12.15%  (CWE 12.15%)
+    VulnCheck                    |    798 |  12.06%  (CWE 12.06%)
+    CISA-ADP                     |    629 |   9.51%  (CWE 8.04%)
+  Patchstack + Wordfence combined: CVSS 25.64%   CWE 25.65%
+  (a record may be counted under several sources; column percentages need not sum to 100%)
+

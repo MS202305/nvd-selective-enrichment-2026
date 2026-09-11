@@ -1,0 +1,51 @@
+registry: 793 sources;  KEV: 1687 CVEs
+
+==============================================================
+IV.A  ENRICHMENT COMPLETENESS  (record and entry-level)
+==============================================================
+[Group A] completeness  (n = 29052)
+  CPE  record-level : NVD 0 (0.0%), CNA 3898 (13.42%)
+       entry-level  : NVD 0, CNA 24600
+  CWE  record-level : real 27225 (93.71%), NVD-assigned 0 (0.0%)
+       entry-level  : NVD 0, non-NVD 28925
+  CVSS record-level : non-NVD 28051 (96.55%), NVD-assigned 0 (0.0%)
+       entry-level  : NVD 0, non-NVD 32037
+
+[Group B] completeness  (n = 13752)
+  CPE  record-level : NVD 0 (0.0%), CNA 2110 (15.34%)
+       entry-level  : NVD 0, CNA 3145
+  CWE  record-level : real 13453 (97.83%), NVD-assigned 0 (0.0%)
+       entry-level  : NVD 0, non-NVD 16562
+  CVSS record-level : non-NVD 13610 (98.97%), NVD-assigned 0 (0.0%)
+       entry-level  : NVD 0, non-NVD 20399
+
+==============================================================
+IV.A  KEV INTERSECTION
+==============================================================
+[Group A] KEV intersection: 0/29052
+[Group B] KEV intersection: 0/13752
+[Group D] KEV intersection: 0/2330
+
+==============================================================
+IV.B  SOURCE PROVIDER COMPOSITION  (Table II)
+==============================================================
+[Group A] source composition  (n = 29052)
+  source                       | CVSS rec  CVSS % |  CWE rec   CWE %
+  Patchstack                   |     9957  34.27% |     9953  34.26%
+  Wordfence                    |     4284  14.75% |     4279  14.73%
+  CISA-ADP                     |     2878   9.91% |     2686   9.25%
+  GitHub, Inc.                 |     1476   5.08% |     1475   5.08%
+  VulDB                        |      979   3.37% |      979   3.37%
+  VulnCheck                    |      964   3.32% |      962   3.31%
+  Patchstack + Wordfence       |           49.02% |           48.99%
+
+[Group B] source composition  (n = 13752)
+  source                       | CVSS rec  CVSS % |  CWE rec   CWE %
+  VulDB                        |     2380  17.31% |     2380  17.31%
+  GitHub, Inc.                 |     1993  14.49% |     1993  14.49%
+  CISA-ADP                     |     1933  14.06% |     1627  11.83%
+  Patchstack                   |     1854  13.48% |     1855  13.49%
+  VulnCheck                    |     1623   11.8% |     1623   11.8%
+  Wordfence                    |     1570  11.42% |     1570  11.42%
+  Patchstack + Wordfence       |            24.9% |           24.91%
+

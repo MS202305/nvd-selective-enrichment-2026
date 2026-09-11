@@ -1,0 +1,24 @@
+Group A  (n = 29062)
+  CVSS (base scores)
+    Patchstack |P|          : 9957 (34.26%)
+    Wordfence  |W|          : 4284 (14.74%)
+    intersection |P n W|    : 0
+    union |P u W| = |P|+|W|-|P n W| : 9957 + 4284 - 0 = 14241 (49.0%)
+  CWE (real classifications)
+    Patchstack |P|          : 9953 (34.25%)
+    Wordfence  |W|          : 4279 (14.72%)
+    intersection |P n W|    : 0
+    union |P u W| = |P|+|W|-|P n W| : 9953 + 4279 - 0 = 14232 (48.97%)
+
+Group B  (n = 6615)
+  CVSS (base scores)
+    Patchstack |P|          : 892 (13.48%)
+    Wordfence  |W|          : 804 (12.15%)
+    intersection |P n W|    : 0
+    union |P u W| = |P|+|W|-|P n W| : 892 + 804 - 0 = 1696 (25.64%)
+  CWE (real classifications)
+    Patchstack |P|          : 893 (13.5%)
+    Wordfence  |W|          : 804 (12.15%)
+    intersection |P n W|    : 0
+    union |P u W| = |P|+|W|-|P n W| : 893 + 804 - 0 = 1697 (25.65%)
+

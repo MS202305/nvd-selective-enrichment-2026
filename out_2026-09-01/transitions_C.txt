@@ -1,0 +1,90 @@
+Group C: 2026-06-29 -> 2026-09-01  (published <= 2026-02-28)
+  records in old snapshot :   97103
+  records in new snapshot :   97103
+  in both                 :   97103
+  only in old (LOST)      :       0  <- crawl gap if > 0
+  only in new             :       0
+
+  Transition matrix (rows = old status, cols = new status):
+                                    Analyzed    Awaiting Analysis             Deferred             Modified             Received             Rejected  Undergoing Analysis
+  Analyzed                             46055                    0                    0                 2375                    0                   15                    6
+  Awaiting Analysis                        1                    1                    0                    0                    0                    0                    0
+  Deferred                                 7                    0                29052                    0                    0                    3                    0
+  Modified                                 7                    0                    0                16053                    0                    7                    2
+  Received                                 0                    0                    0                    0                    0                    0                    0
+  Rejected                                 0                    0                    0                    0                    1                 3509                    0
+  Undergoing Analysis                      6                    0                    0                    0                    0                    0                    3
+
+  records whose status changed: 2430 / 97103  (2.502%)
+
+  Analyzed -> Modified: 2375
+      CVE-2020-36787  (published 2024-02-28)
+      CVE-2020-36788  (published 2024-05-21)
+      CVE-2020-36791  (published 2025-05-07)
+      CVE-2020-37094  (published 2026-02-03)
+      CVE-2021-42193  (published 2025-10-03)
+      ... and 2370 more
+
+  Analyzed -> Rejected: 15
+      CVE-2021-47504  (published 2024-05-24)
+      CVE-2022-48877  (published 2024-08-21)
+      CVE-2024-12534  (published 2025-03-20)
+      CVE-2024-7033  (published 2025-03-20)
+      CVE-2024-7034  (published 2025-03-20)
+      ... and 10 more
+
+  Deferred -> Analyzed: 7
+      CVE-2024-45229  (published 2024-09-20)
+      CVE-2025-23171  (published 2025-06-19)
+      CVE-2025-34025  (published 2025-05-21)
+      CVE-2025-34027  (published 2025-05-21)
+      CVE-2025-34290  (published 2025-12-20)
+      ... and 2 more
+
+  Modified -> Analyzed: 7
+      CVE-2024-0682  (published 2024-02-28)
+      CVE-2024-0829  (published 2024-03-13)
+      CVE-2024-0830  (published 2024-03-13)
+      CVE-2024-24702  (published 2024-02-28)
+      CVE-2024-49604  (published 2024-10-20)
+      ... and 2 more
+
+  Modified -> Rejected: 7
+      CVE-2024-12537  (published 2025-03-20)
+      CVE-2024-57049  (published 2025-02-18)
+      CVE-2024-7038  (published 2024-10-09)
+      CVE-2024-7039  (published 2025-03-20)
+      CVE-2024-7040  (published 2025-03-20)
+      ... and 2 more
+
+  Analyzed -> Undergoing Analysis: 6
+      CVE-2024-12376  (published 2025-03-20)
+      CVE-2025-14963  (published 2026-02-24)
+      CVE-2025-36035  (published 2025-09-14)
+      CVE-2025-45616  (published 2025-05-05)
+      CVE-2025-5152  (published 2025-05-25)
+      ... and 1 more
+
+  Undergoing Analysis -> Analyzed: 6
+      CVE-2025-62230  (published 2025-10-30)
+      CVE-2025-62231  (published 2025-10-30)
+      CVE-2025-8732  (published 2025-08-08)
+      CVE-2026-0989  (published 2026-01-15)
+      CVE-2026-0990  (published 2026-01-15)
+      ... and 1 more
+
+  Deferred -> Rejected: 3
+      CVE-2024-47220  (published 2024-09-22)
+      CVE-2024-8060  (published 2025-03-20)
+      CVE-2026-1518  (published 2026-02-02)
+
+  Modified -> Undergoing Analysis: 2
+      CVE-2023-24416  (published 2024-02-23)
+      CVE-2024-2961  (published 2024-04-17)
+
+  Rejected -> Received: 1
+      CVE-2025-58375  (published 2025-09-06)
+
+  Awaiting Analysis -> Analyzed: 1
+      CVE-2025-1782  (published 2025-04-14)
+

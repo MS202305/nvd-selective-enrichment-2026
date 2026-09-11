@@ -1,0 +1,19 @@
+snapshot 2026-06-29: sub-window retrievals (A+B+D) vs full-period retrieval (C)
+  records in sub-window retrievals :  123635
+  records in full-period retrieval :  123639
+  shared                           :  123635
+  only in sub-window               :       0
+  only in full-period              :       4
+
+  status differs between retrievals: 2 / 123635
+    Group B: Undergoing Analysis -> Analyzed: 2
+      CVE-2026-50221  Group B  Undergoing Analysis -> Analyzed  (published 2026-06-23T18:18:04)
+      CVE-2026-56968  Group B  Undergoing Analysis -> Analyzed  (published 2026-06-23T17:17:09)
+
+  only in full-period retrieval (late arrivals) - first 20:
+    Received: 4
+      CVE-2026-10647  Received  (published 2026-06-29T22:16:42)
+      CVE-2026-34592  Received  (published 2026-06-29T22:16:44)
+      CVE-2026-51221  Received  (published 2026-06-29T22:16:49)
+      CVE-2026-57997  Received  (published 2026-06-29T22:16:49)
+
