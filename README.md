@@ -37,19 +37,8 @@ out_2026-09-01/  analysis outputs for the September snapshot
 
 Eight files, one per group and snapshot, retrieved from the NVD API 2.0
 (`https://services.nvd.nist.gov/rest/json/cves/2.0`) using `pubStartDate` /
-`pubEndDate` in 10-day windows. **They are distributed gzip-compressed.**
-The scripts read plain JSON, so decompress before running:
-
-```
-cd data/raw
-gunzip *.json.gz            # Linux / macOS / Git Bash
-```
-
-or on Windows with Python:
-
-```
-python -c "import gzip,shutil,glob; [shutil.copyfileobj(gzip.open(f,'rb'),open(f[:-3],'wb')) for f in glob.glob('*.json.gz')]"
-```
+`pubEndDate` in 10-day windows. **They are distributed gzip-compressed**;
+decompress them before running any script (see "Prerequisites" below).
 
 After decompression the directory must contain:
 
@@ -88,10 +77,35 @@ retrieved from the NVD Source API (`https://services.nvd.nist.gov/rest/json/sour
 
 ## Reproduction
 
-Requirements: Python 3.10+ (64-bit), `scipy`, `numpy`, `matplotlib`
-(`pip install -r requirements.txt`). The September Group C file is 1.2 GB
-decompressed; `status_transitions.py --group C` loads two Group C snapshots at
-once and needs roughly 6 GB of free RAM.
+### Prerequisites
+
+1. **Decompress the NVD snapshots.** The eight files in `data/raw/` are
+   shipped as `.json.gz`; the scripts read plain `.json`.
+   ```
+   cd data/raw
+   gunzip *.json.gz            # Linux / macOS / Git Bash
+   ```
+   On Windows without gunzip:
+   ```
+   python -c "import gzip,shutil,glob; [shutil.copyfileobj(gzip.open(f,'rb'),open(f[:-3],'wb')) for f in glob.glob('*.json.gz')]"
+   ```
+   The decompressed files total 4.4 GB.
+2. **Python 3.10+ (64-bit)** with `scipy`, `numpy`, `matplotlib`:
+   ```
+   pip install -r requirements.txt
+   ```
+   Run this in the same environment in which `python` (Windows) or `python3`
+   (Linux / macOS) resolves; the run commands below use that interpreter.
+3. **Memory.** The September Group C file is 1.2 GB on disk and several GB
+   once parsed; `status_transitions.py --group C` loads two Group C snapshots
+   at once. Allow roughly 8 GB of free RAM and close other memory-heavy
+   applications.
+4. **Keep the shipped outputs.** The run commands write into `out_<date>/`
+   and overwrite files one by one. If you want to compare your run against
+   the outputs in this repository, rename those directories first, e.g.
+   `ref_out_2026-06-29/`.
+
+### Config handling
 
 All scripts import their file paths from `scripts/config.py`, which is a copy
 of the snapshot-specific `config_<date>.py`. Because the two config files have
@@ -109,7 +123,9 @@ run_all.bat 2026-09-01
 
 `run_all.bat` copies the matching config to `config.py`, removes
 `__pycache__`, sets `PYTHONDONTWRITEBYTECODE=1`, runs every script, and writes
-outputs to `..\out_<date>\`.
+outputs to `..\out_<date>\`. It also writes `_manifest.txt` (run time, Python
+version, active config) into the output directory; that file is not part of
+the repository.
 
 ### Linux / macOS
 
@@ -151,7 +167,10 @@ therefore run only for the September config.
 The `out_2026-06-29/` and `out_2026-09-01/` directories in this repository
 were produced by exactly these commands. Re-running should reproduce every
 number; the bootstrap uses a fixed seed (20260629), so confidence intervals
-are deterministic.
+are deterministic. Two caveats when comparing byte-for-byte: the PNG files
+embed a creation timestamp, and the order of equal-count blocks in
+`transitions_*.txt` follows Python's set iteration and may differ between
+runs — compare content, not bytes.
 
 ## Script → paper section map
 
