@@ -2,38 +2,38 @@
 REM ===================================================================
 REM  run_all.bat  <YYYY-MM-DD>
 REM
-REM  Verilen snapshot tarihine ait config'i etkinlestirir ve makaledeki
-REM  TUM sayilari ureten scriptleri calistirir. Ciktilar:
-REM      ..\out_<tarih>\<ad>.txt
+REM  Activates the config for the given snapshot date and runs every
+REM  script that produces a number in the paper. Outputs:
+REM      ..\out_<date>\<name>.txt
 REM
-REM  KULLANIM (scripts\ dizininden):
+REM  USAGE (from the scripts\ directory):
 REM      run_all.bat 2026-06-29
 REM      run_all.bat 2026-09-01
 REM
-REM  Her script cagrisi oncesi __pycache__ silinir ve
-REM  PYTHONDONTWRITEBYTECODE=1 ayarlanir (config.py degisimi cache'e
-REM  takilmasin diye).
+REM  Before every script call, __pycache__ is removed and
+REM  PYTHONDONTWRITEBYTECODE=1 is set, so a config.py swap is never
+REM  masked by stale bytecode.
 REM
-REM  Kapsam (makale bolumu -> cikti dosyasi):
-REM    IV.A, IV.B, Tablo II, V.B (excluded)  -> IVA-IVB_enrichment_and_composition_full.txt
-REM    V.B, V.C (Group C, tum statuler)      -> provenance_by_status.txt
+REM  Coverage (paper section -> output file):
+REM    IV.A, IV.B, Table II, V.B (excluded)  -> IVA-IVB_enrichment_and_composition_full.txt
+REM    V.B, V.C (Group C, all statuses)       -> provenance_by_status.txt
 REM    IV.E (Modified CPE=100%)              -> provenance_modified.txt
-REM    IV.C, IV.D, Tablo III, Tablo IV (A)   -> rq_A.txt
-REM    IV.E, Tablo IV (A+M)                  -> rq_AM.txt
-REM    IV.E, Tablo IV (non-WP)               -> rq_noWP.txt
+REM    IV.C, IV.D, Table III, Table IV (A)   -> rq_A.txt
+REM    IV.E, Table IV (A+M)                  -> rq_AM.txt
+REM    IV.E, Table IV (non-WP)               -> rq_noWP.txt
 REM    IV.E Group D                          -> IVE_group_d_status_breakdown.txt
 REM    IV.E WordPress share                  -> wordpress_union_share.txt
-REM    (dogrulama, IV.A/IV.B ikinci yol)     -> verify_enrichment_and_composition.txt
+REM    (verification: IV.A/IV.B, independent code path)     -> verify_enrichment_and_composition.txt
 REM    III.C / IV.E cross-retrieval          -> cross_retrieval_check.txt
-REM    IV.E per-CVE transitions (sadece Eyl) -> transitions_A.txt, transitions_C.txt, transitions_D.txt
-REM    Fig. 2, Fig. 3                        -> plot_survival_curves.txt (+PNG/PDF)
+REM    IV.E per-CVE transitions (Sept only) -> transitions_A.txt, transitions_C.txt, transitions_D.txt
+REM    Fig. 2, Fig. 3                        -> plot_survival_curves.txt (+PNG)
 REM ===================================================================
 
 setlocal enabledelayedexpansion
 
 if "%~1"=="" (
-    echo HATA: snapshot tarihi belirtilmedi.
-    echo Kullanim: run_all.bat 2026-06-29
+    echo ERROR: no snapshot date given.
+    echo Usage: run_all.bat 2026-06-29
     goto :son
 )
 
@@ -42,13 +42,13 @@ set CFG=config_%SNAP%.py
 set OUT=..\out_%SNAP%
 
 if not exist "%CFG%" (
-    echo HATA: %CFG% bulunamadi.
+    echo ERROR: %CFG% not found.
     goto :son
 )
 
 if not exist "%OUT%" mkdir "%OUT%"
 
-REM --- global env: bytecode yazma, matplotlib headless ----------------
+REM --- global env: no bytecode, headless matplotlib ----------------
 set PYTHONDONTWRITEBYTECODE=1
 set MPLBACKEND=Agg
 
@@ -60,13 +60,13 @@ echo.
 echo ===================================================================
 echo  Snapshot : %SNAP%
 echo  Config   : %CFG%
-echo  Cikti    : %OUT%\
+echo  Output   : %OUT%\
 echo ===================================================================
 findstr /C:"FETCH_DATE" config.py
 findstr /C:"%SNAP%" config.py > nul
 if errorlevel 1 (
     echo.
-    echo HATA: config.py icinde "%SNAP%" gecmiyor -- yanlis config kopyalanmis olabilir.
+    echo ERROR: config.py does not contain "%SNAP%" -- wrong config may have been copied.
     goto :son
 )
 echo.
@@ -76,21 +76,21 @@ REM --- manifest -------------------------------------------------------
     echo run_all.bat
     echo snapshot      : %SNAP%
     echo config        : %CFG%
-    echo calisma zamani: %DATE% %TIME%
-    echo calisma dizini: %CD%
+    echo run time      : %DATE% %TIME%
+    echo working dir   : %CD%
     echo python        :
     python --version 2>&1
     echo ---- config.py ----
     type config.py
 ) > "%OUT%\_manifest.txt"
 
-REM --- 1. IV.A, IV.B, Tablo II
+REM --- 1. IV.A, IV.B, Table II
 call :run IVA-IVB_enrichment_and_composition_full "" IVA-IVB_enrichment_and_composition_full
 
-REM --- 2. Group C provenance, tum statuler (V.B, V.C)
+REM --- 2. Group C provenance, all statuses (V.B, V.C)
 call :run provenance_by_status "" provenance_by_status
 
-REM --- 3. Group C provenance, sadece Modified (IV.E: CPE 100%)
+REM --- 3. Group C provenance, Modified only (IV.E: CPE 100%)
 call :run provenance_by_status "--status Modified" provenance_modified
 
 REM --- 4. RQ chains: Analyzed ref + bootstrap + top-15 detail
@@ -120,7 +120,7 @@ if not "%SNAP%"=="2026-06-29" (
     call :run status_transitions "--group C --pub-end 2026-02-28 --show-ids 5" transitions_C
     call :run status_transitions "--group D --show-ids 20" transitions_D
 ) else (
-    echo   ATLANDI: status_transitions ^(baseline snapshot, karsilastirma yok^)
+    echo   SKIPPED: status_transitions ^(baseline snapshot, nothing to compare^)
 )
 
 REM --- 12. Survival curves (Fig. 2, Fig. 3)
@@ -128,14 +128,14 @@ call :run plot_survival_curves "" plot_survival_curves
 
 echo.
 echo ===================================================================
-echo  Bitti. Ciktilar: %OUT%\
+echo  Done. Outputs: %OUT%\
 echo ===================================================================
 dir /b "%OUT%"
 echo.
 goto :son
 
 REM -------------------------------------------------------------------
-REM  :clean_cache   -- her script oncesi
+REM  :clean_cache   -- before every script
 REM -------------------------------------------------------------------
 :clean_cache
 if exist __pycache__ rmdir /s /q __pycache__
@@ -143,7 +143,7 @@ set PYTHONDONTWRITEBYTECODE=1
 goto :eof
 
 REM -------------------------------------------------------------------
-REM  :run  <script_adi_py_haric>  "<argumanlar>"  <cikti_adi>
+REM  :run  <script_name_without_py>  "<arguments>"  <output_name>
 REM -------------------------------------------------------------------
 :run
 set SCRIPT=%~1
@@ -154,11 +154,11 @@ if exist "%SCRIPT%.py" (
     echo   [%NAME%] python %SCRIPT%.py %ARGS%
     python "%SCRIPT%.py" %ARGS% > "%OUT%\%NAME%.txt" 2>&1
     if errorlevel 1 (
-        echo      UYARI: hata ile bitti -- %OUT%\%NAME%.txt
+        echo      WARNING: exited with error -- %OUT%\%NAME%.txt
     )
 ) else (
-    echo   ATLANDI: %SCRIPT%.py bulunamadi
-    echo ATLANDI: %SCRIPT%.py bulunamadi > "%OUT%\%NAME%.txt"
+    echo   SKIPPED: %SCRIPT%.py not found
+    echo SKIPPED: %SCRIPT%.py not found > "%OUT%\%NAME%.txt"
 )
 goto :eof
 

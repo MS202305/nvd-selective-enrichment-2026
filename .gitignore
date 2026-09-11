@@ -2,3 +2,4 @@ data/raw/*.json
 scripts/config.py
 scripts/__pycache__/
 *.pyc
+out_*/_manifest.txt

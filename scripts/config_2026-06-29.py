@@ -1,64 +1,65 @@
-# scripts/config.py
+# scripts/config.py  --  snapshot 2026-06-29
 
 import os
 from datetime import date
 
-# ── Veri Çekme Tarihi ──────────────────────────────────────
-# Tüm dinamik bitiş tarihleri buradan alınır
-# Tekrarlanabilirlik için log'a yazılacak
+# -- Collection date ---------------------------------------------
+# All snapshot-dependent window ends derive from this value.
+# Written to the run manifest for reproducibility.
 FETCH_DATE = "2026-06-29"
 
-# ── API Konfigürasyonu ─────────────────────────────────────
+# -- API configuration -------------------------------------------
 NVD_API_KEY = os.environ.get("NVD_API_KEY", "")
 
-# ── Grup Tanımları ─────────────────────────────────────────
+# -- Group definitions -------------------------------------------
 GROUPS = {
     "group_A": {
-        "start" : "2024-02-12",  # Fiili duraklama tarihi (sabit)
-        "end"   : "2026-02-28",  # 1 Mart 2026 öncesi son gün (sabit)
-        "status": "Deferred",   # API degeri; web arayuzu etiketi "Not Scheduled"
-        "note"  : "Backlog kökenli, operasyonel başarısızlık"
+        "start" : "2024-02-12",  # date NVD enrichment effectively stalled (fixed)
+        "end"   : "2026-02-28",  # last day before 1 March 2026 (fixed)
+        "status": "Deferred",    # API value; web-interface label is "Not Scheduled"
+        "note"  : "Backlog: pre-policy, operational stall"
     },
     "group_B": {
-        "start" : "2026-04-15",  # Resmi politika başlangıcı (sabit)
-        "end"   : "2026-06-29",    
-        "status": "Deferred",   # API degeri; web arayuzu etiketi "Not Scheduled"
-        "note"  : "Politika kökenli, kapsam dışı"
+        "start" : "2026-04-15",  # policy effective date (fixed)
+        "end"   : "2026-06-29",  # collection date (snapshot-dependent)
+        "status": "Deferred",    # API value; web-interface label is "Not Scheduled"
+        "note"  : "Post-policy exclusion: deliberately out of scope"
     },
     "group_C": {
-        "start" : "2024-02-12",  # Fiili duraklama tarihi (sabit)
-        "end"   : "2026-06-29",    
+        "start" : "2024-02-12",  # date NVD enrichment effectively stalled (fixed)
+        "end"   : "2026-06-29",  # collection date (snapshot-dependent)
         "status": "Analyzed",
-        "note"  : "Ground truth referans"
+        "note"  : "Reference population (NVD-enriched)"
     },
     "group_D": {
-        "start" : "2026-03-01",  # 1 Mart dahil (sabit)
-        "end"   : "2026-04-14",  # 15 Nisan öncesi son gün (sabit)
-        "status": "Deferred",   # API degeri; web arayuzu etiketi "Not Scheduled"
-        "note"  : "Geçiş dönemi, izole raporlanır"
+        "start" : "2026-03-01",  # 1 March inclusive (fixed)
+        "end"   : "2026-04-14",  # last day before 15 April (fixed)
+        "status": "Deferred",    # API value; web-interface label is "Not Scheduled"
+        "note"  : "Transition window: reported separately"
     }
 }
-# ── Bağlantı Ayarları ──────────────────────────────────────
-REQUEST_TIMEOUT   = 120   # saniye — NVD bazen yavaş yanıt veriyor
-RETRY_WAIT_BASE   = 60    # saniye — hata sonrası bekleme
 
-# ── NVD API Ayarları ───────────────────────────────────────
+# -- Connection settings -----------------------------------------
+REQUEST_TIMEOUT   = 120   # seconds; NVD can be slow to respond
+RETRY_WAIT_BASE   = 60    # seconds; wait after a failed request
+
+# -- NVD API settings --------------------------------------------
 NVD_BASE_URL      = "https://services.nvd.nist.gov/rest/json/cves/2.0"
 RESULTS_PER_PAGE  = 2000
-DELAY_WITH_KEY    = 0.6   # saniye
-DELAY_WITHOUT_KEY = 6.0   # saniye
+DELAY_WITH_KEY    = 0.6   # seconds
+DELAY_WITHOUT_KEY = 6.0   # seconds
 
-MAX_WINDOW_DAYS = 10  
+MAX_WINDOW_DAYS = 10
 
-# ── Dizin Ayarları ─────────────────────────────────────────
+# -- Directories -------------------------------------------------
 DIR_RAW       = "../data/raw"
 DIR_PROCESSED = "../data/processed"
 DIR_SNAPSHOTS = "../data/snapshots"
 
-# -- Turetilmis Dosya Yollari -------------------------------
-# Tum analiz scriptleri varsayilan yollarini buradan alir.
-# Boylece hangi config aktifse o snapshot okunur; scriptlerde
-# sabit tarih veya sabit dizin adi yazili kalmaz.
+# -- Derived file paths ------------------------------------------
+# Every analysis script takes its default paths from here, so the
+# active config determines which snapshot is read; no script hard-codes
+# a date or directory name.
 NVD_GROUP_FILES = {g: f"{DIR_RAW}/nvd_{g}_{FETCH_DATE}.json" for g in GROUPS}
 FILE_GROUP_A = NVD_GROUP_FILES["group_A"]
 FILE_GROUP_B = NVD_GROUP_FILES["group_B"]
@@ -69,30 +70,22 @@ FILE_EPSS     = f"{DIR_SNAPSHOTS}/epss_scores-{FETCH_DATE}.csv"
 FILE_KEV      = f"{DIR_SNAPSHOTS}/known_exploited_vulnerabilities_{FETCH_DATE}.json"
 FILE_REGISTRY = f"{DIR_PROCESSED}/source_registry.json"
 
-# -- Statu Degerleri ----------------------------------------
-# API degerleri kullanilir. Web arayuzundeki karsiliklari:
+# -- Status values -----------------------------------------------
+# API values are used throughout. Web-interface equivalents:
 #   "Deferred" -> "Not Scheduled",  "Analyzed" -> "Analyzed"
 STATUS_EXCLUDED  = "Deferred"
 STATUS_REFERENCE = "Analyzed"
 
 
 def group_window(group_name):
-    """GROUPS tanimindan (start, end) date ikilisi dondurur.
-    Yas kontrolu pencereleri buradan turetilir; scriptlerde sabit
-    tarih yazilmaz."""
+    """Return the (start, end) date pair for a group from GROUPS.
+    Age-control windows are derived from here; scripts never hard-code dates."""
     g = GROUPS[group_name]
     return (date.fromisoformat(g["start"]), date.fromisoformat(g["end"]))
 
-# ── Kritik Uyarı ───────────────────────────────────────────
-# lastModified alanı kullanılmaz.
-# 17 Haziran 2026 SSVC güncellemesi tüm
-# lastModified değerlerini değiştirdi.
-# Grup ayrımı YALNIZCA published tarihi ile yapılır.
-
-'''
-Kural: Analiz ve gruplama yapılırken zafiyetlerin kesinlikle lastModified (son değiştirilme) tarihleri filtresi kullanılmamalıdır. 
-Nedeni: 17 Haziran 2026'da NVD'nin API şemasına getirdiği SSVC güncellemesi veri tabanındaki zafiyetlerin %95'inin 
-"lastModified" zaman damgasını otomatik olarak Haziran 2026'ya çekmiştir. 
-Eğer kod lastModified alanına baksaydı, 2024 yılındaki eski bir açık bile yeni değiştirilmiş gibi görünecek 
-ve analiz tamamen bozulacaktı. Bu yüzden grup ayrımlarının yalnızca published (yayınlanma) tarihi üzerinden yapılması zorunlu kılınmıştır.
-'''
+# -- Critical rule -----------------------------------------------
+# The lastModified field is never used for grouping or filtering.
+# The 17 June 2026 SSVC deployment rewrote lastModified for roughly 95%
+# of all records, so it no longer reflects when a record last changed
+# substantively. Group membership is determined solely by the published
+# timestamp, which is set once at publication and never revised.

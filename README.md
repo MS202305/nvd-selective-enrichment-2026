@@ -27,8 +27,8 @@ data/
   raw/           NVD API 2.0 responses, one file per group and snapshot  (see "Data" below)
   snapshots/     FIRST EPSS daily CSV and CISA KEV catalog, one per snapshot
   processed/     source_registry.json  (NVD Source API: identifier -> organisation name)
-out_2026-06-29/  analysis outputs for the June snapshot   (12 files)
-out_2026-09-01/  analysis outputs for the September snapshot (15 files)
+out_2026-06-29/  analysis outputs for the June snapshot
+out_2026-09-01/  analysis outputs for the September snapshot
 ```
 
 ## Data
@@ -88,7 +88,10 @@ retrieved from the NVD Source API (`https://services.nvd.nist.gov/rest/json/sour
 
 ## Reproduction
 
-Requirements: Python 3.10+, `scipy`, `numpy`, `matplotlib`.
+Requirements: Python 3.10+ (64-bit), `scipy`, `numpy`, `matplotlib`
+(`pip install -r requirements.txt`). The September Group C file is 1.2 GB
+decompressed; `status_transitions.py --group C` loads two Group C snapshots at
+once and needs roughly 6 GB of free RAM.
 
 All scripts import their file paths from `scripts/config.py`, which is a copy
 of the snapshot-specific `config_<date>.py`. Because the two config files have
@@ -148,8 +151,7 @@ therefore run only for the September config.
 The `out_2026-06-29/` and `out_2026-09-01/` directories in this repository
 were produced by exactly these commands. Re-running should reproduce every
 number; the bootstrap uses a fixed seed (20260629), so confidence intervals
-are deterministic. Each directory contains `_manifest.txt` with the config
-that was active during the run.
+are deterministic.
 
 ## Script → paper section map
 
